@@ -1,0 +1,151 @@
+.card {
+  min-height: 320px;
+  padding: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--small-shadow);
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.card h3 {
+  margin: 4px 0 0;
+  color: var(--text-h);
+  font-size: 1.55rem;
+}
+
+.card-label {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.weather-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  color: #d99000;
+  background: #fff6dc;
+  border-radius: 8px;
+  font-size: 1.55rem;
+}
+
+.temperature-row {
+  margin: 30px 0;
+}
+
+.temperature-row strong {
+  display: block;
+  color: var(--text-h);
+  font-size: clamp(3.2rem, 8vw, 5rem);
+  line-height: 0.95;
+}
+
+.temperature-row span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.weather-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.weather-stats p {
+  margin: 0;
+  padding: 14px;
+  color: var(--text-h);
+  background: var(--bg);
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.weather-stats span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.places-list {
+  display: grid;
+  gap: 14px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.places-list li {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 14px;
+  padding: 16px;
+  background: var(--bg);
+  border-radius: 8px;
+}
+
+.place-index {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: #ffffff;
+  background: var(--green);
+  border-radius: 8px;
+  font-weight: 800;
+}
+
+.place-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.place-title-row h4 {
+  margin: 0;
+  color: var(--text-h);
+}
+
+.place-title-row span {
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  color: #7a5000;
+  background: #fff2d2;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.places-list p {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+@media (max-width: 560px) {
+  .card {
+    padding: 20px;
+  }
+
+  .weather-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .place-title-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
