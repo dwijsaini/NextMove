@@ -1,48 +1,37 @@
 import { useState } from 'react';
 import Home from './pages/Home';
+import { fetchPlaces, fetchWeather } from './services/api';
 
 function App() {
   const [cityName, setCityName] = useState('');
   const [weatherData, setWeatherData] = useState(null);
-  const [places, setPlaces] = useState([]);
+  const [places, setPlaces] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleSearch = (city) => {
+  const handleSearch = async (city) => {
     console.log('Search requested for:', city);
     setCityName(city);
     setLoading(true);
     setError(null);
+    setWeatherData(null);
+    setPlaces(null);
 
-    // Placeholder for Rudra and Dwij: call API functions here, then set state.
-    setTimeout(() => {
-      setWeatherData({
-        city,
-        temperature: 27,
-        condition: 'Clear skies',
-        humidity: 58,
-        wind: '12 km/h',
-        feelsLike: 29,
-      });
-      setPlaces([
-        {
-          name: `${city} Old Quarter`,
-          description: 'Historic streets, local cafes, and evening walks.',
-          tag: 'Culture',
-        },
-        {
-          name: `${city} Viewpoint`,
-          description: 'A scenic stop for skyline photos and sunset plans.',
-          tag: 'Outdoors',
-        },
-        {
-          name: `${city} Food Market`,
-          description: 'Street food, regional snacks, and quick bites nearby.',
-          tag: 'Food',
-        },
+    try {
+      const [weather, placesData] = await Promise.all([
+        fetchWeather(city),
+        fetchPlaces(city),
       ]);
+
+      setWeatherData(weather);
+      setPlaces(placesData);
+    } catch (searchError) {
+      setError(searchError.message || 'Something went wrong. Please try again.');
+      setWeatherData(null);
+      setPlaces(null);
+    } finally {
       setLoading(false);
-    }, 900);
+    }
   };
 
   return (

@@ -39,6 +39,14 @@
   font-size: 1.55rem;
 }
 
+.weather-icon-img {
+  width: 64px;
+  height: 64px;
+  padding: 4px;
+  background: #eff7ff;
+  border-radius: 8px;
+}
+
 .temperature-row {
   margin: 30px 0;
 }
@@ -59,7 +67,7 @@
 
 .weather-stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
 }
 
@@ -85,6 +93,30 @@
   margin: 22px 0 0;
   padding: 0;
   list-style: none;
+}
+
+.places-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 8;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background: var(--bg);
+}
+
+.places-summary {
+  margin: 14px 0 0;
+  color: var(--muted);
+}
+
+.attractions-section {
+  margin-top: 22px;
+}
+
+.attractions-section > h4 {
+  margin: 0;
+  color: var(--text-h);
 }
 
 .places-list li {

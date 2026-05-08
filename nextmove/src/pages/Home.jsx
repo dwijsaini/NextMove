@@ -4,7 +4,7 @@ import PlacesCard from '../components/PlacesCard';
 import './Home.css';
 
 const Home = ({ cityName, weatherData, places, loading, onSearch }) => {
-  const hasData = Boolean(weatherData) && places.length > 0;
+  const hasData = Boolean(weatherData) && Boolean(places);
 
   return (
     <div className="home">
@@ -32,8 +32,8 @@ const Home = ({ cityName, weatherData, places, loading, onSearch }) => {
 
       {hasData && !loading && (
         <div className="cards-grid">
-          <WeatherCard data={weatherData} />
-          <PlacesCard data={places} />
+          <WeatherCard weatherData={weatherData} />
+          <PlacesCard placesData={places} />
         </div>
       )}
     </div>
