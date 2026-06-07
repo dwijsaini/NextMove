@@ -1,9 +1,26 @@
 import SearchBar from '../components/SearchBar';
 import WeatherCard from '../components/WeatherCard';
 import PlacesCard from '../components/PlacesCard';
+import SkeletonCard from '../components/SkeletonCard';
+import BestTimeWidget from '../components/BestTimeWidget';
+import ForecastStrip from '../components/ForecastStrip';
+import LocalClock from '../components/LocalClock';
+import MapCard from '../components/MapCard';
+import CurrencyEstimator from '../components/CurrencyEstimator';
+import Phrasebook from '../components/Phrasebook';
 import './Home.css';
 
-const Home = ({ cityName, weatherData, places, loading, onSearch }) => {
+const Home = ({
+  cityName,
+  weatherData,
+  places,
+  forecastData,
+  loading,
+  onSearch,
+  recents,
+  favorites,
+  toggleFavorite,
+}) => {
   const hasData = Boolean(weatherData) && Boolean(places);
 
   return (
@@ -13,7 +30,12 @@ const Home = ({ cityName, weatherData, places, loading, onSearch }) => {
           <p className="eyebrow">Travel info in one clean view</p>
           <h1>Find the weather and the places worth your next stop.</h1>
         </div>
-        <SearchBar onSearch={onSearch} loading={loading} />
+        <SearchBar
+          onSearch={onSearch}
+          loading={loading}
+          recents={recents}
+          favorites={favorites}
+        />
       </section>
 
       {!hasData && !loading && (
@@ -23,17 +45,40 @@ const Home = ({ cityName, weatherData, places, loading, onSearch }) => {
         </div>
       )}
 
-      {loading && (
-        <div className="loading" role="status" aria-label="Loading travel information">
-          <span className="spinner spinner--page" aria-hidden="true" />
-          <p>Getting {cityName || 'your city'} ready...</p>
-        </div>
-      )}
+      {loading && <SkeletonCard />}
 
       {hasData && !loading && (
         <div className="cards-grid">
-          <WeatherCard weatherData={weatherData} />
-          <PlacesCard placesData={places} />
+          <div className="home-column home-column-left">
+            <LocalClock
+              key={`${weatherData.city}-${weatherData.timezone}`}
+              timezoneOffset={weatherData.timezone}
+              cityName={weatherData.city}
+            />
+            <WeatherCard
+              weatherData={weatherData}
+              favorites={favorites}
+              toggleFavorite={toggleFavorite}
+            />
+            <ForecastStrip forecastData={forecastData} />
+            {weatherData.country && (
+              <CurrencyEstimator countryCode={weatherData.country} />
+            )}
+            {weatherData.country && (
+              <Phrasebook countryCode={weatherData.country} />
+            )}
+            <BestTimeWidget city={cityName} />
+          </div>
+          <div className="home-column home-column-right">
+            <PlacesCard placesData={places} />
+            {weatherData.coord && (
+              <MapCard
+                coord={weatherData.coord}
+                cityName={weatherData.city}
+                attractions={places.attractions}
+              />
+            )}
+          </div>
         </div>
       )}
     </div>

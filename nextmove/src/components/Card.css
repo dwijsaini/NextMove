@@ -1,10 +1,23 @@
 .card {
   min-height: 320px;
   padding: 24px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  box-shadow: var(--small-shadow);
+  background: var(--card-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+body[data-theme='dark'] .card:hover {
+  box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.4);
 }
 
 .card-header {
@@ -17,7 +30,9 @@
 .card h3 {
   margin: 4px 0 0;
   color: var(--text-h);
-  font-size: 1.55rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
 
 .card-label {
@@ -26,6 +41,7 @@
   font-size: 0.78rem;
   font-weight: 800;
   text-transform: uppercase;
+  letter-spacing: 1.2px;
 }
 
 .weather-icon {
@@ -43,8 +59,9 @@
   width: 64px;
   height: 64px;
   padding: 4px;
-  background: #eff7ff;
-  border-radius: 8px;
+  background: var(--accent-light);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
 }
 
 .temperature-row {
@@ -54,8 +71,10 @@
 .temperature-row strong {
   display: block;
   color: var(--text-h);
-  font-size: clamp(3.2rem, 8vw, 5rem);
+  font-size: clamp(3.2rem, 8vw, 4.5rem);
   line-height: 0.95;
+  font-weight: 800;
+  letter-spacing: -2px;
 }
 
 .temperature-row span {
@@ -75,9 +94,15 @@
   margin: 0;
   padding: 14px;
   color: var(--text-h);
-  background: var(--bg);
-  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 12px;
   font-weight: 700;
+}
+
+body[data-theme='dark'] .weather-stats p {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .weather-stats span {
@@ -98,16 +123,17 @@
 .places-image {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 8;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-bottom: 20px;
-  background: var(--bg);
+  background: var(--border);
 }
 
 .places-summary {
   margin: 14px 0 0;
-  color: var(--muted);
+  color: var(--text);
+  line-height: 1.6;
 }
 
 .attractions-section {
@@ -115,8 +141,10 @@
 }
 
 .attractions-section > h4 {
-  margin: 0;
+  margin: 0 0 14px 0;
   color: var(--text-h);
+  font-weight: 800;
+  font-size: 1.1rem;
 }
 
 .places-list li {
@@ -124,8 +152,21 @@
   grid-template-columns: 36px 1fr;
   gap: 14px;
   padding: 16px;
-  background: var(--bg);
-  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 12px;
+  transition: var(--transition);
+}
+
+body[data-theme='dark'] .places-list li {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.places-list li:hover {
+  transform: translateY(-2px);
+  background: var(--accent-light);
+  border-color: var(--accent);
 }
 
 .place-index {
@@ -135,8 +176,44 @@
   height: 36px;
   color: #ffffff;
   background: var(--green);
+  box-shadow: var(--green-light);
   border-radius: 8px;
   font-weight: 800;
+}
+
+.city-title-with-fav {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fav-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+
+body[data-theme='dark'] .fav-btn {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.fav-btn:hover {
+  transform: scale(1.2);
+  color: #fbbf24;
+}
+
+.fav-btn.is-fav {
+  color: #f59e0b;
+  filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.45));
 }
 
 .place-title-row {

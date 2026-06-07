@@ -1,0 +1,61 @@
+.phrasebook-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.phrasebook-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.phrase-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 10px;
+  transition: var(--transition);
+}
+
+body[data-theme='dark'] .phrase-item {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.phrase-item:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
+
+.phrase-meanings {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.phrase-english {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.phrase-local {
+  font-size: 1rem;
+  color: var(--text-h);
+}
+
+.phrase-phonetic {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--muted);
+  font-weight: 600;
+  padding: 4px 8px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}

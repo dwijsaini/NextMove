@@ -18,21 +18,32 @@ const normalizeWeatherData = (weatherData) => {
   };
 };
 
-const WeatherCard = ({ weatherData, data }) => {
+const WeatherCard = ({ weatherData, data, favorites, toggleFavorite }) => {
   const weather = normalizeWeatherData(weatherData ?? data);
 
   if (!weather) {
     return null;
   }
 
+  const fullCityName = weather.country ? `${weather.city}, ${weather.country}` : weather.city;
+  const isFav = favorites?.includes(fullCityName);
+
   return (
     <article className="card weather-card">
       <div className="card-header">
         <div>
           <p className="card-label">Current Weather</p>
-          <h3>
+          <h3 className="city-title-with-fav">
             {weather.city}
             {weather.country ? <span>, {weather.country}</span> : null}
+            <button
+              onClick={() => toggleFavorite && toggleFavorite(fullCityName)}
+              className={`fav-btn ${isFav ? 'is-fav' : ''}`}
+              aria-label={isFav ? `Remove ${weather.city} from favorites` : `Add ${weather.city} to favorites`}
+              title={isFav ? 'Remove from favorites' : 'Add to favorites'}
+            >
+              ★
+            </button>
           </h3>
         </div>
         {weather.icon ? (

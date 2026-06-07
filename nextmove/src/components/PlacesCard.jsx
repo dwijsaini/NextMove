@@ -1,3 +1,4 @@
+import Carousel from './Carousel';
 import './Card.css';
 
 const PlacesCard = ({ placesData, data }) => {
@@ -7,10 +8,22 @@ const PlacesCard = ({ placesData, data }) => {
     return null;
   }
 
+  const slides = [];
+  if (places.image) {
+    slides.push({ url: places.image, title: places.summary.title });
+  }
+  places.attractions.forEach((att) => {
+    if (att.image) {
+      slides.push({ url: att.image, title: att.title });
+    }
+  });
+
   return (
     <article className="card places-card">
-      {places.image ? (
-        <img className="places-image" src={places.image} alt={places.summary.title} />
+      {slides.length > 0 ? (
+        <div style={{ marginBottom: '20px' }}>
+          <Carousel key={places.summary.title} slides={slides} />
+        </div>
       ) : null}
       <div className="card-header">
         <div>

@@ -1,0 +1,136 @@
+.forecast-card {
+  background: var(--card-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+}
+
+.forecast-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(31, 38, 135, 0.08);
+}
+
+.forecast-title {
+  margin: 0 0 16px 0;
+  color: var(--text-h);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.forecast-strip {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+/* Scrollbar styling for horizontal strip */
+.forecast-strip::-webkit-scrollbar {
+  height: 6px;
+}
+
+.forecast-strip::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.forecast-strip::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 3px;
+}
+
+body[data-theme='dark'] .forecast-strip::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.forecast-day-pill {
+  flex: 1;
+  min-width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 6px;
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 10px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+body[data-theme='dark'] .forecast-day-pill {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.forecast-day-pill:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
+
+.forecast-day-name {
+  font-weight: 700;
+  color: var(--text-h);
+  font-size: 0.9rem;
+}
+
+.forecast-date-str {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.forecast-icon-wrap {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  margin: 6px 0;
+}
+
+.forecast-icon {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.forecast-icon-placeholder {
+  font-size: 1.25rem;
+  color: #eab308;
+}
+
+.forecast-temps {
+  display: flex;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.temp-max {
+  color: var(--text-h);
+}
+
+.temp-min {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.forecast-desc {
+  font-size: 0.7rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-transform: capitalize;
+}
+
+@media (max-width: 640px) {
+  .forecast-strip {
+    justify-content: flex-start;
+  }
+}
